@@ -29,25 +29,26 @@ public class ClockDegrees {
 				isMinute = true;
 			} 
 		} while (!isMinute);
+		int convertMin = minute;
 		if (minute == 0) {
-			minute = 60;
+			convertMin = 60;
 		}
 		int degreesHour = (360 * hour) / 12;
-		int degreesMinute = (360 * minute) / 60;
+		int degreesMinute = (360 * convertMin) / 60;
 		if (minute > 49) {
-			degreesHour += 5;
+			degreesHour += 25;
 		} else if (minute > 39) {
-			degreesHour += 4;
+			degreesHour += 20;
 		} else if (minute > 29) {
-			degreesHour += 3;
+			degreesHour += 15;
 		} else if (minute > 19) {
-			degreesHour += 2;
+			degreesHour += 10;
 		} else if (minute > 9) {
-			degreesHour += 1;
+			degreesHour += 5;
 		}
 		Integer[] candidateResults = {Math.abs(degreesHour - degreesMinute), Math.abs(degreesMinute - degreesHour), 
-		Math.abs(degreesHour - (360 + degreesMinute)), Math.abs(degreesMinute - (360 + degreesHour))};
+		Math.abs(360 - (degreesHour - degreesMinute)), Math.abs(360 - (degreesMinute - degreesHour))};
 		int result = Collections.min(Arrays.asList(candidateResults));
 		System.out.println("The circular degree between the two clock hands is " + result);
-		}
+	}
 }
